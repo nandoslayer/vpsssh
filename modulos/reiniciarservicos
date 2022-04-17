@@ -49,5 +49,5 @@ echo -ne "\033[1;33mREINICIANDO APACHE2 "; fun_prog '/etc/init.d/apache2 restart
 echo ""
 sleep 1
 fi
-echo -e "\033[1;32mSERVICOS REINICIADOS COM SUCESSO!\033[0m"
+echo -e "\033[1;32mSERVIÇÕS REINICIADOS COM SUCESSO!\033[0m"
 sleep 1

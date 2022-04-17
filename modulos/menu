@@ -297,7 +297,7 @@ stsom=$(ps x | grep "shutdown -r 16:00"|grep -v grep > /dev/null && echo -e "\03
 autm=$(grep "menu;" /etc/profile > /dev/null && echo -e "\033[1;32m(ON ◉) " || echo -e "\033[1;31m(OFF ○)")
 clear
 echo -e "\033[1;37m═─────────────────────────────────────────────────────────────═\033[0m"
-echo -e "\033[1;1;37m                          🚀 NZX ON 🚀                  \E[0m"
+echo -e "\033[1;1;37m                          🚀 AUTOSSH 🚀                  \E[0m"
 echo -e "\033[1;37m═─────────────────────────────────────────────────────────────═\033[0m"
 echo -e "\033[1;32mSISTEMA              \033[1;37m| \033[1;32mMEMÓRIA RAM           \033[1;37m| \033[1;32mPROCESSADOR "
 echo -e "\033[1;31mOS: \033[1;37m$_system   | \033[1;31mTOTAL:\033[1;37m$_ram      | \033[1;31mNUCLEO: \033[1;37m$_core\033[0m"

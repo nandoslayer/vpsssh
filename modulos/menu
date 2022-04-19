@@ -42,7 +42,7 @@ ${comando[1]} > /dev/null 2>&1
 touch $HOME/fim
  ) > /dev/null 2>&1 &
  tput civis
-echo -ne "  \033[1;33mAGUARDE \033[1;37m- \033[1;33m["
+echo -ne "\033[1;33mAGUARDE \033[1;37m- \033[1;33m["
 while true; do
    for((i=0; i<18; i++)); do
    echo -ne "\033[1;31m#"
@@ -53,31 +53,28 @@ while true; do
    sleep 1s
    tput cuu1
    tput dl1
-   echo -ne "  \033[1;33mAGUARDE \033[1;37m- \033[1;33m["
+   echo -ne "\033[1;33mAGUARDE \033[1;37m- \033[1;33m["
 done
-echo -e "\033[1;33m]\033[1;37m -\033[1;32m OK !\033[1;37m"
+echo -e "\033[1;33m]\033[1;37m -\033[1;32m OK !\033[1;37m "
 tput cnorm
 }
 fun_tst () {
 speedtest --share > speed
 }
 echo ""
-echo -e "\033[1;37m═─────────────────────────────────────────────────────────────═\033[0m"
-echo -e "\E[44;1;37m            🚀 TESTE DE VELOCIDADE DA INTERNET 🚀              \E[0m"
-echo -e "\033[1;37m═─────────────────────────────────────────────────────────────═\033[0m"
-echo ""
+echo -e "\033[1;37m┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\033[0m"
+echo -e "\033[1;37m┃\E[44;1;37m             🚀 TESTE DE VELOCIDADE DO SERVIDOR 🚀            \E[0m\033[1;37m┃"
+echo -e "\033[1;37m┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\033[0m"
 aguarde 'fun_tst'
-echo ""
 png=$(cat speed | sed -n '5 p' |awk -F : {'print $NF'})
 down=$(cat speed | sed -n '7 p' |awk -F :  {'print $NF'})
 upl=$(cat speed | sed -n '9 p' |awk -F :  {'print $NF'})
 lnk=$(cat speed | sed -n '10 p' |awk {'print $NF'})
-echo -e "\033[1;37m═─────────────────────────────────────────────────────────────═\033[0m"
-echo -e "\033[1;32mPING (LATENCIA):\033[1;37m$png"
+echo -e "\033[1;37m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "\033[1;32mPING:\033[1;37m$png"
 echo -e "\033[1;32mDOWNLOAD:\033[1;37m$down"
 echo -e "\033[1;32mUPLOAD:\033[1;37m$upl"
-echo -e "\033[1;32mLINK: \033[1;36m$lnk\033[0m"
-echo -e "\033[1;37m═─────────────────────────────────────────────────────────────═\033[0m"
+echo -e "\033[1;37m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 rm -rf $HOME/speed
 }
 #limiter
@@ -177,34 +174,34 @@ _ons=$(ps -x | grep sshd | grep -v root | grep priv | wc -l)
 _onli=$(($_ons + $_onop + $_ondrp))
 _ram=$(printf ' %-9s' "$(free -h | grep -i mem | awk {'print $2'})")
 _usor=$(printf '%-8s' "$(free -m | awk 'NR==2{printf "%.2f%%", $3*100/$2 }')")
-_usop=$(printf '%-1s' "$(top -bn1 | awk '/Cpu/ { cpu = "" 100 - $8 "%" }; END { print cpu }')")
-_core=$(printf '%-1s' "$(grep -c cpu[0-9] /proc/stat)")
+_usop=$(printf '%-5s' "$(top -bn1 | awk '/Cpu/ { cpu = "" 100 - $8 "%" }; END { print cpu }')")
+_core=$(printf '%-5s' "$(grep -c cpu[0-9] /proc/stat)")
 _system=$(printf '%-14s' "$system")
 _hora=$(printf '%(%H:%M:%S)T')
 _onlin=$(printf '%-5s' "$_onli")
 _userexp=$(printf '%-5s' "$_expuser")
-_tuser=$(awk -F: '$3>=1000 {print $1}' /etc/passwd | grep -v nobody | wc -l)
+_tuser=$(printf '%-5s' "$(awk -F: '$3>=1000 {print $1}' /etc/passwd | grep -v nobody | wc -l)")
 clear
-echo -e "\033[1;37m═─────────────────────────────────────────────────────────────═\033[0m"
-echo -e "\033[1;1;37m                          🚀 AUTOSSH 🚀                  \E[0m"
-echo -e "\033[1;37m═─────────────────────────────────────────────────────────────═\033[0m"
-echo -e "\033[1;32mSISTEMA              \033[1;37m| \033[1;32mMEMÓRIA RAM           \033[1;37m| \033[1;32mPROCESSADOR "
-echo -e "\033[1;31mOS: \033[1;37m$_system   | \033[1;31mTOTAL:\033[1;37m$_ram      | \033[1;31mNUCLEO: \033[1;37m$_core\033[0m"
-echo -e "\033[1;31mHORÁRIO: \033[1;37m$_hora    | \033[1;31mEM USO: \033[1;37m$_usor      | \033[1;31mEM USO: \033[1;37m$_usop\033[0m"
-echo -e "\033[1;36mUDP FAST \033[1;37m $stsu \033[1;37m    | \033[1;36mBOT TELEGRAM $stsbot \033[1;37m  | \033[1;37m\033[1;36mLIMITER \033[1;37m $stsl"
+echo -e "\033[1;37m┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\033[0m"
+echo -e "\033[1;37m┃\033[1;1;37m                          🚀 AUTOSSH 🚀                        \033[1;37m┃"
+echo -e "\033[1;37m┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\033[0m"
+echo -e "\033[1;37m┃\033[1;32mSISTEMA              \033[1;37m| \033[1;32mMEMÓRIA RAM           \033[1;37m| \033[1;32mPROCESSADOR    \033[1;37m┃"
+echo -e "\033[1;37m┃\033[1;31mOS: \033[1;37m$_system   | \033[1;31mTOTAL:\033[1;37m$_ram      | \033[1;31mNUCLEO: \033[1;37m$_core\033[0m  \033[1;37m┃"
+echo -e "\033[1;37m┃\033[1;31mHORÁRIO: \033[1;37m$_hora    | \033[1;31mEM USO: \033[1;37m$_usor      | \033[1;31mEM USO: \033[1;37m$_usop\033[0m  \033[1;37m┃"
+echo -e "\033[1;37m┃\033[1;36mUDP FAST \033[1;37m $stsu \033[1;37m    | \033[1;36mBOT TELEGRAM $stsbot \033[1;37m  | \033[1;37m\033[1;36mLIMITER \033[1;37m$stsl \033[1;37m┃"
 [[ ! -e /tmp/att ]]  && {
-    echo -e "\033[1;32mCONECTADOS:\033[1;37m $_onlin    | \033[1;31mVENCIDOS: \033[1;37m$_userexp       | \033[1;33mCRIADOS: \033[1;37m$_tuser\033[0m"
+    echo -e "\033[1;37m┃\033[1;32mCONECTADOS:\033[1;37m $_onlin    | \033[1;31mVENCIDOS: \033[1;37m$_userexp       | \033[1;33mCRIADOS: \033[1;37m$_tuser\033[0m \033[1;37m┃"
     var01='\033[1;37m•'
 }
-echo -e "\033[1;37m═─────────────────────────────────────────────────────────────═\033[0m"
-echo -e "\033[1;31m[\033[1;36m22\033[1;31m] \033[1;37m• \033[1;33mREINICIAR SISTEMA \033[1;31m          [\033[1;36m28\033[1;31m] \033[1;37m• \033[1;33mAUTO EXECUCAO $autm \033[1;31m
-[\033[1;36m23\033[1;31m] \033[1;37m• \033[1;33mREINICIAR SERVIÇOS \033[1;31m         [\033[1;36m29\033[1;31m] \033[1;37m• \033[1;33mBLOCK SITE \033[1;31m
-[\033[1;36m24\033[1;31m] \033[1;37m• \033[1;33mBLOCK TORRENT $stsf\033[1;31m        [\033[1;36m30\033[1;31m] \033[1;37m• \033[1;33mMUDAR SENHA ROOT \033[1;31m
-[\033[1;36m25\033[1;31m] \033[1;37m• \033[1;33mBOT TELEGRAM $stsbot\033[1;31m         [\033[1;36m31\033[1;31m] \033[1;37m• \033[1;33mATUALIZAR SCRIPT \033[1;31m
-[\033[1;36m26\033[1;31m] \033[1;37m• \033[1;33mMEMORY SWAP\033[1;31m                 [\033[1;36m32\033[1;31m] \033[1;37m• \033[1;33mREMOVER SCRIPT \033[1;31m
-[\033[1;36m27\033[1;31m] \033[1;37m• \033[1;33mTCPTWEAKER       \033[1;31m           [\033[1;36m00\033[1;31m] \033[1;37m• \033[1;33mVOLTAR \033[1;32m<\033[1;33m<\033[1;31m< \033[1;31m"
-echo -e "\033[1;37m═─────────────────────────────────────────────────────────────═\033[0m"
-echo -ne "\033[1;32mOQUE DESEJA FAZER \033[1;33m?\033[1;31m?\033[1;37m : "; read x
+echo -e "\033[1;37m┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\033[0m"
+echo -e "\033[1;37m┃\033[1;31m[\033[1;36m22\033[1;31m] \033[1;37m• \033[1;37mREINICIAR SISTEMA \033[1;31m          [\033[1;36m28\033[1;31m] \033[1;37m• \033[1;37mAUTO EXECUCAO $autm\033[1;31m\033[1;37m┃
+\033[1;37m┃\033[1;31m[\033[1;36m23\033[1;31m] \033[1;37m• \033[1;37mREINICIAR SERVIÇOS \033[1;31m         [\033[1;36m29\033[1;31m] \033[1;37m• \033[1;37mBLOQUEAR SITE\033[1;31m       \033[1;37m┃
+\033[1;37m┃\033[1;31m[\033[1;36m24\033[1;31m] \033[1;37m• \033[1;37mBLOQUEAR TORRENT $stsf\033[1;31m     [\033[1;36m30\033[1;31m] \033[1;37m• \033[1;37mMUDAR SENHA ROOT \033[1;31m   \033[1;37m┃
+\033[1;37m┃\033[1;31m[\033[1;36m25\033[1;31m] \033[1;37m• \033[1;37mBOT TELEGRAM $stsbot\033[1;31m         [\033[1;36m31\033[1;31m] \033[1;37m• \033[1;37mATUALIZAR SCRIPT \033[1;31m   \033[1;37m┃
+\033[1;37m┃\033[1;31m[\033[1;36m26\033[1;31m] \033[1;37m• \033[1;37mMEMORIA VIRTUAL\033[1;31m             [\033[1;36m32\033[1;31m] \033[1;37m• \033[1;37mREMOVER SCRIPT \033[1;31m     \033[1;37m┃
+\033[1;37m┃\033[1;31m[\033[1;36m27\033[1;31m] \033[1;37m• \033[1;37mTCPTWEAKER       \033[1;31m           [\033[1;36m00\033[1;31m] \033[1;37m• \033[1;37mVOLTAR \033[1;32m<\033[1;33m<\033[1;31m<          \033[1;31m\033[1;37m┃"
+echo -e "\033[1;37m┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\033[0m"
+echo -ne "\033[1;37m┗┫\033[1;32mOQUE DESEJA FAZER \033[1;33m?\033[1;31m?\033[1;37m : "; read x
 case "$x" in
    22)
    clear
@@ -280,13 +277,13 @@ _ons=$(ps -x | grep sshd | grep -v root | grep priv | wc -l)
 _onli=$(($_ons + $_onop + $_ondrp))
 _ram=$(printf ' %-9s' "$(free -h | grep -i mem | awk {'print $2'})")
 _usor=$(printf '%-8s' "$(free -m | awk 'NR==2{printf "%.2f%%", $3*100/$2 }')")
-_usop=$(printf '%-1s' "$(top -bn1 | awk '/Cpu/ { cpu = "" 100 - $8 "%" }; END { print cpu }')")
-_core=$(printf '%-1s' "$(grep -c cpu[0-9] /proc/stat)")
+_usop=$(printf '%-5s' "$(top -bn1 | awk '/Cpu/ { cpu = "" 100 - $8 "%" }; END { print cpu }')")
+_core=$(printf '%-5s' "$(grep -c cpu[0-9] /proc/stat)")
 _system=$(printf '%-14s' "$system")
 _hora=$(printf '%(%H:%M:%S)T')
 _onlin=$(printf '%-5s' "$_onli")
 _userexp=$(printf '%-5s' "$_expuser")
-_tuser=$(awk -F: '$3>=1000 {print $1}' /etc/passwd | grep -v nobody | wc -l)
+_tuser=$(printf '%-5s' "$(awk -F: '$3>=1000 {print $1}' /etc/passwd | grep -v nobody | wc -l)")
 [[ -e /etc/Plus-torrent ]] && stsf=$(echo -e "\033[1;32m(ON ◉)") || stsf=$(echo -e "\033[1;31m(OFF○)")
 stsbot=$(ps x | grep "bot_plus"|grep -v grep > /dev/null && echo -e "\033[1;32m(ON ◉)" || echo -e "\033[1;31m(OFF○)")
 stsbotteste=$(ps x | grep "bot_teste"|grep -v grep > /dev/null && echo -e "\033[1;32m(ON ◉) " || echo -e "\033[1;31m(OFF○)")
@@ -296,31 +293,31 @@ stson=$(ps x | grep "onlineapp"|grep -v grep > /dev/null && echo -e "\033[1;32m(
 stsom=$(ps x | grep "shutdown -r 16:00"|grep -v grep > /dev/null && echo -e "\033[1;32m(ON ◉) " || echo -e "\033[1;31m(OFF○) ")
 autm=$(grep "menu;" /etc/profile > /dev/null && echo -e "\033[1;32m(ON ◉) " || echo -e "\033[1;31m(OFF ○)")
 clear
-echo -e "\033[1;37m═─────────────────────────────────────────────────────────────═\033[0m"
-echo -e "\033[1;1;37m                          🚀 AUTOSSH 🚀                  \E[0m"
-echo -e "\033[1;37m═─────────────────────────────────────────────────────────────═\033[0m"
-echo -e "\033[1;32mSISTEMA              \033[1;37m| \033[1;32mMEMÓRIA RAM           \033[1;37m| \033[1;32mPROCESSADOR "
-echo -e "\033[1;31mOS: \033[1;37m$_system   | \033[1;31mTOTAL:\033[1;37m$_ram      | \033[1;31mNUCLEO: \033[1;37m$_core\033[0m"
-echo -e "\033[1;31mHORÁRIO: \033[1;37m$_hora    | \033[1;31mEM USO: \033[1;37m$_usor      | \033[1;31mEM USO: \033[1;37m$_usop\033[0m"
-echo -e "\033[1;36mUDP FAST \033[1;37m $stsu \033[1;37m    | \033[1;36mBOT TELEGRAM $stsbot \033[1;37m  | \033[1;37m\033[1;36mLIMITER \033[1;37m $stsl"
+echo -e "\033[1;37m┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\033[0m"
+echo -e "\033[1;1;37m┃                          🚀 AUTOSSH 🚀                        \033[1;37m┃\E[0m"
+echo -e "\033[1;37m┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\033[0m"
+echo -e "\033[1;37m┃\033[1;32mSISTEMA              \033[1;37m| \033[1;32mMEMÓRIA RAM           \033[1;37m| \033[1;32mPROCESSADOR    \033[1;37m┃"
+echo -e "┃\033[1;31mOS: \033[1;37m$_system   | \033[1;31mTOTAL:\033[1;37m$_ram      | \033[1;31mNUCLEO: \033[1;37m$_core\033[0m  \033[1;37m┃"
+echo -e "┃\033[1;31mHORÁRIO: \033[1;37m$_hora    | \033[1;31mEM USO: \033[1;37m$_usor      | \033[1;31mEM USO: \033[1;37m$_usop\033[0m  \033[1;37m┃"
+echo -e "┃\033[1;36mUDP FAST \033[1;37m $stsu \033[1;37m    | \033[1;36mBOT TELEGRAM $stsbot \033[1;37m  | \033[1;37m\033[1;36mLIMITER \033[1;37m$stsl \033[1;37m┃"
 [[ ! -e /tmp/att ]]  && {
-    echo -e "\033[1;32mCONECTADOS:\033[1;37m $_onlin    | \033[1;31mVENCIDOS: \033[1;37m$_userexp       | \033[1;33mCRIADOS: \033[1;37m$_tuser\033[0m"
+    echo -e "┃\033[1;32mCONECTADOS:\033[1;37m $_onlin    | \033[1;31mVENCIDOS: \033[1;37m$_userexp       | \033[1;33mCRIADOS: \033[1;37m$_tuser\033[0m \033[1;37m┃"
     var01='\033[1;37m•'
 }
-echo -e "\033[1;37m═─────────────────────────────────────────────────────────────═\033[0m"
-echo -e "\033[1;31m[\033[1;36m01\033[1;31m] \033[1;37m• \033[1;33mCRIAR LOGIN \033[1;31m                 [\033[1;36m12\033[1;31m] \033[1;37m• \033[1;33mSPEEDTEST \033[1;31m
-[\033[1;36m02\033[1;31m] \033[1;37m• \033[1;33mCRIAR LOGIN TESTE \033[1;31m           [\033[1;36m13\033[1;31m] \033[1;37m• \033[1;33mBANNER \033[1;31m
-[\033[1;36m03\033[1;31m] \033[1;37m\033[1;37m• \033[1;33mREMOVER LOGIN \033[1;31m               [\033[1;36m14\033[1;31m] \033[1;37m• \033[1;33mTRAFEGO \033[1;31m
-[\033[1;36m04\033[1;31m] \033[1;37m• \033[1;33mUSUARIOS ONLINE \033[1;31m             [\033[1;36m15\033[1;31m] \033[1;37m• \033[1;33mOTIMIZAR \033[1;31m
-[\033[1;36m05\033[1;31m] \033[1;37m• \033[1;33mMUDAR DATA \033[1;31m                  [\033[1;36m16\033[1;31m] \033[1;37m• \033[1;33mBACKUP \033[1;31m
-[\033[1;36m06\033[1;31m] \033[1;37m• \033[1;33mALTERAR LIMITE \033[1;31m              [\033[1;36m17\033[1;31m] \033[1;37m• \033[1;33mLIMITER $stsl\033[1;31m
-[\033[1;36m07\033[1;31m] \033[1;37m• \033[1;33mMUDAR SENHA \033[1;31m                 [\033[1;36m18\033[1;31m] \033[1;37m• \033[1;33mUDP FAST $stsu\033[1;31m
-[\033[1;36m08\033[1;31m] \033[1;37m• \033[1;33mREMOVER EXPIRADOS \033[1;31m           [\033[1;36m19\033[1;31m] \033[1;37m• \033[1;33mINFO VPS \033[1;31m
-[\033[1;36m09\033[1;31m] \033[1;37m• \033[1;33mRELATORIO DE USUARIOS \033[1;31m       [\033[1;36m20\033[1;31m] \033[1;37m• \033[1;33mSINCRONIZAR PAINEL\033[1;31m 
-[\033[1;36m10\033[1;31m] \033[1;37m• \033[1;33mPORTAS DE CONEXAO \033[1;31m           [\033[1;36m21\033[1;31m] \033[1;37m• \033[1;33mMAIS \033[1;31m>\033[1;33m>\033[1;32m>\033[0m\033[1;31m
-[\033[1;36m11\033[1;31m] \033[1;37m• \033[1;33mSUSPENDER USUARIO \033[1;31m           [\033[1;36m00\033[1;31m] \033[1;37m• \033[1;33mSAIR \033[1;32m<\033[1;33m<\033[1;31m<\033[0m \033[0m"
-echo -e "\033[1;37m═─────────────────────────────────────────────────────────────═\033[0m"
-echo -ne "\033[1;32mOQUE DESEJA FAZER \033[1;33m?\033[1;31m?\033[1;37m : "; read x
+echo -e "\033[1;37m┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\033[0m"
+echo -e "\033[1;37m┃\033[1;31m[\033[1;36m01\033[1;31m] \033[1;37m• \033[1;37mCRIAR LOGIN \033[1;31m                 [\033[1;36m12\033[1;31m] \033[1;37m• \033[1;37mSPEEDTEST \033[1;31m         \033[1;37m┃
+┃\033[1;31m[\033[1;36m02\033[1;31m] \033[1;37m• \033[1;37mCRIAR LOGIN TESTE \033[1;31m           [\033[1;36m13\033[1;31m] \033[1;37m• \033[1;37mBANNER \033[1;31m            \033[1;37m┃
+┃\033[1;31m[\033[1;36m03\033[1;31m] \033[1;37m\033[1;37m• \033[1;37mREMOVER LOGIN \033[1;31m               [\033[1;36m14\033[1;31m] \033[1;37m• \033[1;37mTRAFEGO \033[1;31m           \033[1;37m┃
+┃\033[1;31m[\033[1;36m04\033[1;31m] \033[1;37m• \033[1;37mUSUARIOS ONLINE \033[1;31m             [\033[1;36m15\033[1;31m] \033[1;37m• \033[1;37mOTIMIZAR \033[1;31m          \033[1;37m┃
+┃\033[1;31m[\033[1;36m05\033[1;31m] \033[1;37m• \033[1;37mMUDAR DATA \033[1;31m                  [\033[1;36m16\033[1;31m] \033[1;37m• \033[1;37mBACKUP \033[1;31m            \033[1;37m┃
+┃\033[1;31m[\033[1;36m06\033[1;31m] \033[1;37m• \033[1;37mALTERAR LIMITE \033[1;31m              [\033[1;36m17\033[1;31m] \033[1;37m• \033[1;37mLIMITER $stsl\033[1;31m     \033[1;37m┃
+┃\033[1;31m[\033[1;36m07\033[1;31m] \033[1;37m• \033[1;37mMUDAR SENHA \033[1;31m                 [\033[1;36m18\033[1;31m] \033[1;37m• \033[1;37mUDP FAST $stsu\033[1;31m    \033[1;37m┃
+┃\033[1;31m[\033[1;36m08\033[1;31m] \033[1;37m• \033[1;37mREMOVER EXPIRADOS \033[1;31m           [\033[1;36m19\033[1;31m] \033[1;37m• \033[1;37mINFO VPS \033[1;31m          \033[1;37m┃
+┃\033[1;31m[\033[1;36m09\033[1;31m] \033[1;37m• \033[1;37mRELATORIO DE USUARIOS \033[1;31m       [\033[1;36m20\033[1;31m] \033[1;37m• \033[1;37mSINCRONIZAR PAINEL\033[1;31m \033[1;37m┃
+┃\033[1;31m[\033[1;36m10\033[1;31m] \033[1;37m• \033[1;37mPORTAS DE CONEXAO \033[1;31m           [\033[1;36m21\033[1;31m] \033[1;37m• \033[1;37mMAIS \033[1;31m>\033[1;33m>\033[1;32m>\033[0m\033[1;31m           \033[1;37m┃
+┃\033[1;31m[\033[1;36m11\033[1;31m] \033[1;37m• \033[1;37mSUSPENDER USUARIO \033[1;31m           [\033[1;36m00\033[1;31m] \033[1;37m• \033[1;37mSAIR \033[1;32m<\033[1;33m<\033[1;31m<\033[0m \033[0m          \033[1;37m┃"
+echo -e "\033[1;37m┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\033[0m"
+echo -ne "\033[1;37m┗━┫\033[1;32mOQUE DESEJA FAZER \033[1;33m?\033[1;31m?\033[1;37m : "; read x
 
 case "$x" in 
    1 | 01)

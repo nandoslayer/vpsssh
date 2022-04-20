@@ -44,17 +44,27 @@ fun_badvpn() {
             clear
             echo -e "\033[1;32mINICIANDO O BADVPN... \033[0m\n"
             fun_udpon () {
-                screen -dmS udpvpn /bin/badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 10000 --max-connections-for-client 10
+                screen -dmS udpvpn /bin/badvpn-udpgw --listen-addr 127.0.0.1:7100 --max-clients 1000 --max-connections-for-client 30
+                screen -dmS udpvpn /bin/badvpn-udpgw --listen-addr 127.0.0.1:7200 --max-clients 1000 --max-connections-for-client 30
+                screen -dmS udpvpn /bin/badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 1000 --max-connections-for-client 30
+                screen -dmS udpvpn /bin/badvpn-udpgw --listen-addr 127.0.0.1:7400 --max-clients 1000 --max-connections-for-client 30
+                screen -dmS udpvpn /bin/badvpn-udpgw --listen-addr 127.0.0.1:7500 --max-clients 1000 --max-connections-for-client 30
+                screen -dmS udpvpn /bin/badvpn-udpgw --listen-addr 127.0.0.1:7600 --max-clients 1000 --max-connections-for-client 30
                 [[ $(grep -wc "udpvpn" /etc/rc.local) = '0' ]] && {
                 echo -e "#!/bin/sh -e" >/etc/rc.local
-                echo -e "screen -dmS udpvpn /bin/badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 10000 --max-connections-for-client 10" >>/etc/rc.local
+                echo -e "screen -dmS udpvpn /bin/badvpn-udpgw --listen-addr 127.0.0.1:7100 --max-clients 1000 --max-connections-for-client 30" >>/etc/rc.local
+                echo -e "screen -dmS udpvpn /bin/badvpn-udpgw --listen-addr 127.0.0.1:7200 --max-clients 1000 --max-connections-for-client 30" >>/etc/rc.local
+                echo -e "screen -dmS udpvpn /bin/badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 1000 --max-connections-for-client 30" >>/etc/rc.local
+                echo -e "screen -dmS udpvpn /bin/badvpn-udpgw --listen-addr 127.0.0.1:7400 --max-clients 1000 --max-connections-for-client 30" >>/etc/rc.local
+                echo -e "screen -dmS udpvpn /bin/badvpn-udpgw --listen-addr 127.0.0.1:7500 --max-clients 1000 --max-connections-for-client 30" >>/etc/rc.local
+                echo -e "screen -dmS udpvpn /bin/badvpn-udpgw --listen-addr 127.0.0.1:7600 --max-clients 1000 --max-connections-for-client 30" >>/etc/rc.local
                 chmod +x /etc/rc.local &>/dev/null
                 systemctl enable rc-local.service &>/dev/null
                 systemctl start rc-local.service &>/dev/null
                 systemctl restart rc-local.service &>/dev/null
                 } || {
                     sed -i '/udpvpn/d' /etc/rc.local
-                    echo -e "screen -dmS udpvpn /bin/badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 10000 --max-connections-for-client 10" >>/etc/rc.local
+                    echo -e "screen -dmS udpvpn /bin/badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 1000 --max-connections-for-client 30" >>/etc/rc.local
                 }
                 sleep 1
             }
@@ -95,9 +105,9 @@ fun_badvpn() {
             echo ""
             fun_abrirptbad() {
                 sleep 1
-                screen -dmS udpvpn /bin/badvpn-udpgw --listen-addr 127.0.0.1:$porta --max-clients 10000 --max-connections-for-client 10
+                screen -dmS udpvpn /bin/badvpn-udpgw --listen-addr 127.0.0.1:$porta --max-clients 1000 --max-connections-for-client 30
                 sleep 1
-                echo -e "screen -dmS udpvpn /bin/badvpn-udpgw --listen-addr 127.0.0.1:$porta --max-clients 10000 --max-connections-for-client 10" >>/etc/rc.local
+                echo -e "screen -dmS udpvpn /bin/badvpn-udpgw --listen-addr 127.0.0.1:$porta --max-clients 1000 --max-connections-for-client 30" >>/etc/rc.local
                 chmod +x /etc/rc.local &>/dev/null
             }
             fun_abrirptbad

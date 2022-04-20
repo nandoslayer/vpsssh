@@ -1,7 +1,4 @@
 barra="\033[0m\e[34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-
-##SCRIPTS A INSTALAR
-
 clear
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e "\E[44;1;37m               ○ SICRONIZADOR PAINEL WEB ○            \E[0m"
@@ -31,7 +28,7 @@ case "$x" in
    exit;
    ;;
    *)
-   echo -e "\n\033[1;31mOpcao invalida !\033[0m"
+   echo -e "\n\033[1;31mOpção inválida !\033[0m"
    sleep 2
 esac
 done

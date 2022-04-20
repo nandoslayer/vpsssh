@@ -69,7 +69,7 @@ else
 	menu
 fi
 else
-echo -e "\033[1;31m[\033[1;33m!\033[1;31m]\033[1;33m FUNCAO BETA ULTILIZE POR SUA CONTA EM RISCO"
+echo -e "\033[1;31m[\033[1;33m!\033[1;31m]\033[1;33m FUNÇÃO BETA ULTILIZE POR SUA CONTA EM RISCO"
 echo ""
 read -p "$(echo -ne "\033[1;32mDESEJA APLICAR REGRAS FIREWALL ? \033[1;33m[s/n]:\033[1;37m") " -e -i n resp
 if [[ "$resp" = 's' ]]; then

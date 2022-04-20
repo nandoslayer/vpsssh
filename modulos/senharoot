@@ -1,8 +1,8 @@
 #!/bin/bash
 
-echo -e "\033[1;31mATENCAO!!\033[0m"
+echo -e "\033[1;31mATENÇÃO!!\033[0m"
 echo " "
-echo -e "\033[1;33mEssa senha sera usada para entrar no seu servidor
+echo -e "\033[1;33mEssa senha será usada para entrar no seu servidor
 \033[0m"
 echo -e "\033[1;32mDIGITE A NOVA SENHA \033[1;32m
 para continuar...\033[1;31m\033[0m"

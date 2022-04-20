@@ -22,7 +22,7 @@ if [[ "$resp" = "1" ]]; then
 echo ""
 echo -ne "\033[1;32mQUAL MENSAGEM DESEJA EXIBIR\033[1;31m ?\033[1;37m : "; read msg1
 if [[ -z "$msg1" ]]; then
-	echo -e "\n\033[1;31mCampo vazio ou invalido !\033[0m"
+	echo -e "\n\033[1;31mCampo vazio ou inválido !\033[0m"
 	sleep 2
 	banner
 fi
@@ -79,7 +79,7 @@ echo -e "\n\033[1;32mBANNER DEFINIDO !\033[0m"
 sleep 2
 menu
 else
-echo -e "\n\033[1;31mOpcao invalida !\033[0m"
+echo -e "\n\033[1;31mOpção inválida !\033[0m"
 	sleep 2
 	banner
 fi
@@ -89,14 +89,14 @@ echo -e "\n\033[1;32mBANNER DEFINIDO !\033[0m"
 unset ban_cor
 elif [[ "$resp" = "2" ]]; then
 	echo " " > $local
-	echo -e "\n\033[1;32mBANNER EXCLUIDO !\033[0m"
+	echo -e "\n\033[1;32mBANNER EXCLUÍDO !\033[0m"
 	service ssh restart > /dev/null 2>&1 && service dropbear restart > /dev/null 2>&1
 	sleep 2
 	menu
 elif [[ "$resp" = "3" ]]; then
 	menu
 else
-	echo -e "\n\033[1;31mOpcao invalida !\033[0m"
+	echo -e "\n\033[1;31mOpção inválida !\033[0m"
 	sleep 2
 	banner
 fi

@@ -1,7 +1,7 @@
 #!/bin/bash
 #====================================================
-#	SCRIPT: LIMITER NZX NET
-#	DESENVOLVIDO POR:	JEFFSSH
+#	SCRIPT: LIMITER AUTOSSH
+#	DESENVOLVIDO POR:	NANDOTORRES
 #====================================================
 clear
 database="/root/usuarios.db"
@@ -33,5 +33,5 @@ fun_multilogin() {
 while true; do
     echo 'verificando...'
 	fun_multilogin > /dev/null 2>&1
-	sleep 30s
+	sleep 15s
 done
